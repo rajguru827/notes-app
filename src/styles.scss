@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+}
+.notes {
+    position: relative;
+    height: calc(100% - 69px);
+    .note-list {
+        position: fixed;
+        height: 100%;
+        width: 350px;
+        overflow-y: auto;
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background-color: lightgray;
+        }
+    }
+    .editor {
+        height: 100%;
+        width: 100%;
+        border: none;
+        resize: none;
+        padding: 15px 15px 15px 375px;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.note-item {
+    border-bottom: 1px solid lightgray;
+    padding: 15px;
+    .note-item-action {
+        color: #495057;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    &:hover {
+        background-color: lightyellow;
+    }
+    .title {
+        font-size: 24px;
+    }
+}
