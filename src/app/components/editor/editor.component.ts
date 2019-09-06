@@ -9,7 +9,7 @@ import { NotesService } from '../../services/notes.service';
 export class EditorComponent implements OnInit {
 
   constructor(
-    private notesService: NotesService
+    public notesService: NotesService
   ) { }
 
   ngOnInit() {
