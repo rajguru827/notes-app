@@ -11,6 +11,7 @@ export class NotesService {
   private _text: string;
   private _searchTerm: string;
   private _notesList$ = new BehaviorSubject<Note[]>([]);
+  private _selectedNote: Note;
 
   constructor() { }
 
@@ -34,8 +35,26 @@ export class NotesService {
     return this._notesList$.asObservable();
   }
 
+  set selectedNote(note: Note) {
+    this._selectedNote = note;
+  }
+
+  get selectedNote() {
+    return this._selectedNote;
+  }
+
   addNote(note: Note) {
     this._notesList$.next(this._notesList$.getValue().concat([note]));
+  }
+
+  deleteNote() {
+    if (this.selectedNote) {
+      const notes: Note[] = this._notesList$.getValue();
+      notes.forEach((item, index) => {
+        if (item === this.selectedNote) { notes.splice(index, 1); }
+      });
+      this._notesList$.next(notes);
+    }
   }
 
 }
