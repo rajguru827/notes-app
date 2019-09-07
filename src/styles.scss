@@ -2,9 +2,8 @@
 html, body {
     height: 100%;
 }
-.notes {
-    position: relative;
-    height: calc(100% - 69px);
+.notes.sidebar {    
+    position: relative; 
     .note-list {
         position: fixed;
         height: 100%;
@@ -20,12 +19,18 @@ html, body {
             background-color: lightgray;
         }
     }
+    .editor {        
+        padding: 15px 15px 15px 375px;
+    }
+}
+.notes {
+    height: calc(100% - 72px);  
     .editor {
+        padding: 15px;
         height: 100%;
         width: 100%;
         border: none;
         resize: none;
-        padding: 15px 15px 15px 375px;
         &:focus {
             outline: none;
         }

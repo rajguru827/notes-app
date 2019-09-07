@@ -1,6 +1,6 @@
 <div class="note-list">
     <ul class="list-inline m-0">
-        <li class="note-item" *ngFor="let note of noteList | async">
+        <li class="note-item" *ngFor="let note of noteList | async | filter: notesService.searchTerm">
             <a href="#" class="note-item-action">
                 <h1 class="title">{{note.text}}</h1>
                 <p class="mb-0"><small>{{note.createdDate | date}}</small></p>

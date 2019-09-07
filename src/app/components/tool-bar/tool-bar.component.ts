@@ -9,7 +9,7 @@ import { NotesService } from 'src/app/services/notes.service';
 export class ToolBarComponent implements OnInit {
 
   constructor(
-    private notesService: NotesService
+    public notesService: NotesService
   ) { }
 
   ngOnInit() {
@@ -24,4 +24,7 @@ export class ToolBarComponent implements OnInit {
     this.notesService.text = '';
   }
 
+  toogleSideBar() {
+    this.notesService.toggleSidebar.emit();
+  }
 }

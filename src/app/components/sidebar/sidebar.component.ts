@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   noteList: Observable<Note[]>;
 
   constructor(
-    private notesService: NotesService
+    public notesService: NotesService
   ) { }
 
   ngOnInit() {

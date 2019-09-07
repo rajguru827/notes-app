@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Note } from '../interfaces/note';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,7 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class NotesService {
 
+  public toggleSidebar: EventEmitter<any> = new EventEmitter();
   private _text: string;
+  private _searchTerm: string;
   private _notesList$ = new BehaviorSubject<Note[]>([]);
 
   constructor() { }
@@ -18,6 +20,14 @@ export class NotesService {
 
   set text(note: string) {
     this._text = note;
+  }
+
+  get searchTerm() {
+    return this._searchTerm;
+  }
+
+  set searchTerm(searchTerm: string) {
+    this._searchTerm = searchTerm;
   }
 
   get noteList() {

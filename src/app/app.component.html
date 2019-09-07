@@ -1,6 +1,6 @@
 
 <app-tool-bar></app-tool-bar>
-<div class="notes">
+<div class="notes" [ngClass]="{'sidebar': isSidebarActive}">
   <app-sidebar></app-sidebar>
   <app-editor></app-editor>
 </div>
