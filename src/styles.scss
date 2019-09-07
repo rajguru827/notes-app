@@ -5,6 +5,7 @@ html, body {
 .notes.sidebar {    
     position: relative; 
     .note-list {
+        display: block;
         position: fixed;
         height: 100%;
         width: 350px;
@@ -25,6 +26,9 @@ html, body {
 }
 .notes {
     height: calc(100% - 72px);  
+    .note-list {
+        display: none;
+    }
     .editor {
         padding: 15px;
         height: 100%;
