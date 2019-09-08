@@ -1,10 +1,11 @@
 <div class="note-list">
     <ul class="list-inline m-0">
-        <li class="note-item" *ngFor="let note of noteList | async | filter: notesService.searchTerm">
+        <li class="note-item" *ngFor="let note of noteList | async | filter: notesService.searchTerm" [ngClass]="{'selected': notesService.selectedNote == note}">
             <a href="javascript:;" class="note-item-action" (click)="notesService.selectedNote = note">
                 <h1 class="title">{{note.text}}</h1>
                 <p class="mb-0"><small>{{note.createdDate | date}}</small></p>
             </a>
         </li>
     </ul>
+    <p *ngIf="notesService.noteListCount <= 0" class="p-3">No Notes!</p>
 </div>

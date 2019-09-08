@@ -1,17 +1,17 @@
 <div class="tool-bar p-3 bg-dark">
     <ul class="list-inline m-0">
         <li class="list-inline-item">
-            <button type="button" class="btn btn-light btn-sm" (click)="toogleSideBar()"> <i class="fa fa-bars"
+            <button type="button" class="btn btn-light btn-sm" (click)="toogleSideBar()" title="Toogle List"> <i class="fa fa-bars"
                     aria-hidden="true"></i></button>
         </li>
         <!-- <li class="list-inline-item">
             <button type="button" class="btn btn-light btn-sm" (click)="save()"><i class="fa fa-save"></i></button>
         </li> -->
         <li class="list-inline-item">
-            <button type="button" class="btn btn-light btn-sm" (click)="save()"><i class="fa fa-edit"></i></button>
+            <button type="button" class="btn btn-light btn-sm" (click)="save()" title="Save Note"><i class="fa fa-edit"></i></button>
         </li>
         <li class="list-inline-item">
-            <button type="button" class="btn btn-light btn-sm" (click)="notesService.deleteNote()"><i class="fa fa-trash"></i></button>
+            <button type="button" class="btn btn-light btn-sm" (click)="notesService.deleteNote()" [disabled]="!notesService.selectedNote" title="Delete Note"><i class="fa fa-trash"></i></button>
         </li>
         <li class="list-inline-item">
             <input type="search" class="form-control form-control-sm" [(ngModel)]="notesService.searchTerm"

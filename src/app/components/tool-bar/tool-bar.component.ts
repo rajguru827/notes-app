@@ -17,6 +17,7 @@ export class ToolBarComponent implements OnInit {
 
   save() {
     const note = {
+      id: this.notesService.noteListCount + 1,
       text: this.notesService.text,
       createdDate: new Date()
     };

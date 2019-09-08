@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Note } from '../interfaces/note';
 import { BehaviorSubject } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,16 @@ export class NotesService {
   private _searchTerm: string;
   private _notesList$ = new BehaviorSubject<Note[]>([]);
   private _selectedNote: Note;
+  private storage: StorageService;
 
-  constructor() { }
+  constructor(
+    private _storageService: StorageService
+  ) {
+    this.storage = _storageService;
+    if (this.storage.retrieve('noteList') && this.storage.retrieve('noteList').length) {
+      this._notesList$.next(this.storage.retrieve('noteList'));
+    }
+  }
 
   get text() {
     return this._text;
@@ -43,8 +52,13 @@ export class NotesService {
     return this._selectedNote;
   }
 
+  get noteListCount() {
+    return this._notesList$.getValue().length;
+  }
+
   addNote(note: Note) {
     this._notesList$.next(this._notesList$.getValue().concat([note]));
+    this.storage.store('noteList', this._notesList$.getValue());
   }
 
   deleteNote() {
@@ -55,6 +69,8 @@ export class NotesService {
       });
       this._notesList$.next(notes);
     }
+    this.storage.store('noteList', this._notesList$.getValue());
+    this.selectedNote = null;
   }
 
 }

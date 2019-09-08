@@ -49,7 +49,7 @@ html, body {
             text-decoration: none;
         }
     }
-    &:hover {
+    &:hover, &.selected {
         background-color: lightyellow;
     }
     .title {
