@@ -3,7 +3,7 @@
         <li class="note-item" *ngFor="let note of noteList | async | filter: notesService.searchTerm" [ngClass]="{'selected': notesService.selectedNote == note}">
             <a href="javascript:;" class="note-item-action" (click)="notesService.selectedNote = note">
                 <h1 class="title">{{note.text}}</h1>
-                <p class="mb-0"><small>{{note.createdDate | date}}</small></p>
+                <p class="mb-0"><small>{{note.createdDate | date:'medium'}}</small></p>
             </a>
         </li>
     </ul>

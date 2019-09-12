@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Note } from '../interfaces/note';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class NotesService {
   private _text: string;
   private _searchTerm: string;
   private _notesList$ = new BehaviorSubject<Note[]>([]);
-  private _selectedNote: Note;
+  private _selectedNote = new BehaviorSubject<Note>(null);
   private storage: StorageService;
 
   constructor(
@@ -30,6 +30,11 @@ export class NotesService {
 
   set text(note: string) {
     this._text = note;
+    if (note && this._selectedNote.getValue()) {
+      const selNote = this._selectedNote.getValue();
+      selNote.text = this._text;
+      this._selectedNote.next(selNote);
+    }
   }
 
   get searchTerm() {
@@ -45,11 +50,14 @@ export class NotesService {
   }
 
   set selectedNote(note: Note) {
-    this._selectedNote = note;
+    this._selectedNote.next(note);
+    if (this._selectedNote.getValue()) {
+      this.text = this._selectedNote.getValue().text;
+    }
   }
 
   get selectedNote() {
-    return this._selectedNote;
+    return this._selectedNote.getValue();
   }
 
   get noteListCount() {
@@ -58,6 +66,18 @@ export class NotesService {
 
   addNote(note: Note) {
     this._notesList$.next(this._notesList$.getValue().concat([note]));
+    this.storage.store('noteList', this._notesList$.getValue());
+  }
+
+  updateNote(note: Note) {
+    const noteList: Note[] = [];
+    this._notesList$.getValue().map(item => {
+      if (item.id === note.id) {
+        item = note;
+      }
+      noteList.push(item);
+    });
+    this._notesList$.next(noteList);
     this.storage.store('noteList', this._notesList$.getValue());
   }
 

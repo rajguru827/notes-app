@@ -16,13 +16,23 @@ export class ToolBarComponent implements OnInit {
   }
 
   save() {
-    const note = {
-      id: this.notesService.noteListCount + 1,
-      text: this.notesService.text,
-      createdDate: new Date()
-    };
-    this.notesService.addNote(note);
+    if (this.notesService.selectedNote) {
+      this.notesService.selectedNote = {
+        id: this.notesService.selectedNote.id,
+        text: this.notesService.text,
+        createdDate: new Date()
+      };
+      this.notesService.updateNote(this.notesService.selectedNote);
+    } else {
+      const note = {
+        id: this.notesService.noteListCount + 1,
+        text: this.notesService.text,
+        createdDate: new Date()
+      };
+      this.notesService.addNote(note);
+    }
     this.notesService.text = '';
+    this.notesService.selectedNote = null;
   }
 
   toogleSideBar() {
